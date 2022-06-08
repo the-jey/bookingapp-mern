@@ -6,6 +6,7 @@ import authRoute from "./api/routes/auth.js";
 import usersRoute from "./api/routes/users.js";
 import roomsRoute from "./api/routes/rooms.js";
 import hotelsRoute from "./api/routes/hotels.js";
+import { ErrorMiddleware } from "./api/utils/error.js";
 
 // Initialize the .env file
 dotenv.config();
@@ -37,6 +38,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
+// Error middleware
+app.use(ErrorMiddleware);
 
 // Start the backend server
 const PORT = 8080 || process.env.PORT;
