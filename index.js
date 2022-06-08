@@ -2,6 +2,11 @@ import express from "express"; // Need to add {"type": "module"} in package.json
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import authRoute from "./api/routes/auth.js";
+import usersRoute from "./api/routes/users.js";
+import roomsRoute from "./api/routes/rooms.js";
+import hotelsRoute from "./api/routes/hotels.js";
+
 // Initialize the .env file
 dotenv.config();
 
@@ -25,6 +30,12 @@ mongoose.connection.on("disconnected", () => {
 mongoose.connection.on("connected", () => {
   console.log("MongoDB connection is now open 📖");
 });
+
+// Middlewares
+app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/hotels", hotelsRoute);
+app.use("/api/rooms", roomsRoute);
 
 // Start the backend server
 const PORT = 8080 || process.env.PORT;
