@@ -1,6 +1,7 @@
 import express from "express"; // Need to add {"type": "module"} in package.json
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import authRoute from "./api/routes/auth.js";
 import usersRoute from "./api/routes/users.js";
@@ -33,6 +34,7 @@ mongoose.connection.on("connected", () => {
 });
 
 // Middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
